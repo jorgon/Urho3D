@@ -153,3 +153,8 @@ add_subdirectory (Samples)
 if (URHO3D_EXTRAS)
     add_subdirectory (Extras)
 endif ()
+
+# Urho3D .Net Binding
+if (URHO3D_DOTNET)
+    add_subdirectory (DotNet)
+endif ()
