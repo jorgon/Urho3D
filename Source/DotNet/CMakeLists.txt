@@ -20,6 +20,9 @@
 # THE SOFTWARE.
 #
 
+
+set (URHO3D_DOCS 1)
+
 # Set project name
 project (Urho3D-DotNet)
 
@@ -35,6 +38,6 @@ include_directories (${URHO3D_INCLUDE_DIRS})
 
 add_custom_target(
     generateBinding
-    COMMAND dotnet run ${CMAKE_CURRENT_SOURCE_DIR}/generatebinding
+    COMMAND dotnet run ${CMAKE_CURRENT_SOURCE_DIR}/generatebinding ${CMAKE_CURRENT_SOURCE_DIR}
 )
 add_dependencies(Urho3DDotNet generateBinding)

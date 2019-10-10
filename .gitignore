@@ -111,3 +111,8 @@ configure*
 *.bak
 Thumbs.db
 .directory
+
+Source/DotNet/generatebinding/.vs
+Source/DotNet/generatebinding/bin
+Source/DotNet/generatebinding/obj
+
