@@ -38,6 +38,6 @@ include_directories (${URHO3D_INCLUDE_DIRS})
 
 add_custom_target(
     generateBinding
-    COMMAND dotnet run ${CMAKE_CURRENT_SOURCE_DIR}/generatebinding ${CMAKE_CURRENT_SOURCE_DIR}
+    COMMAND dotnet run --project "${CMAKE_CURRENT_SOURCE_DIR}/generatebinding/generateBinding.csproj" "${CMAKE_BINARY_DIR}/Docs/xml" "${CMAKE_CURRENT_SOURCE_DIR}"
 )
 add_dependencies(Urho3DDotNet generateBinding)

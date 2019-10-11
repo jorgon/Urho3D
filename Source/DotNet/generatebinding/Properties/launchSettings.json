@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "generatebinding": {
+      "commandName": "Project",
+      "commandLineArgs": "C:/Personal/Urho3D/build/Docs/xml C:/Personal/Urho3D/Source/DotNet"
+    }
+  }
+}
