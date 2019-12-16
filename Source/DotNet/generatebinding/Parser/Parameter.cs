@@ -6,7 +6,7 @@ namespace generatebinding.Parser
 {
     public class Parameter
     {
-        public string Type;
+        public List<object> Type;
         public string Name;
     }
 }

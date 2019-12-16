@@ -4,7 +4,7 @@ using System.Text;
 
 namespace generatebinding.Parser
 {
-    class Type
+    public class Type
     {
         public string ID;
         public string Kind;
@@ -12,5 +12,11 @@ namespace generatebinding.Parser
         public Namespace Namespace;
 
         public List<string> BaseTypes = new List<string>();
+        public List<Member> Members = new List<Member>();
+
+        public override string ToString()
+        {
+            return FullName;
+        }
     }
 }

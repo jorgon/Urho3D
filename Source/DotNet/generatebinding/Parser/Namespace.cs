@@ -4,11 +4,16 @@ using System.Text;
 
 namespace generatebinding.Parser
 {
-    class Namespace
+    public class Namespace
     {
         public string ID;
         public string FullName;
 
         public List<Type> Types = new List<Type>();
+
+        public override string ToString()
+        {
+            return FullName;
+        }
     }
 }

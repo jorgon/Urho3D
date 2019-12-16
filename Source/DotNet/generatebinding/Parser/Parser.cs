@@ -12,6 +12,8 @@ namespace generatebinding.Parser
         private XmlDocument indexDoc;
         List<Namespace> namespaces = new List<Namespace>();
 
+        public Dictionary<string, Type> Types = new Dictionary<string, Type>();
+
         public string Rootpath { get; }
 
         public Parser(string rootpath)
@@ -21,6 +23,11 @@ namespace generatebinding.Parser
             indexDoc.Load(Path.Combine(rootpath, "index.xml"));
 
             ParseNamespaces();
+            PostProcess();
+        }
+
+        private void PostProcess()
+        {
         }
 
         private void ParseNamespaces()
@@ -57,6 +64,8 @@ namespace generatebinding.Parser
                         Namespace = ns
                     };
 
+                    Types[type.ID] = type;
+
                     ns.Types.Add(type);
 
                     
@@ -84,9 +93,11 @@ namespace generatebinding.Parser
 
             foreach (XmlNode node in doc.SelectNodes("/doxygen/compounddef/sectiondef/memberdef"))
             {
+                var id = node.GetAttribute("id");
                 var kind = node.GetAttribute("kind");
                 var name = node.GetChildText("name");
                 var rawargs = node.GetChildText("argsstring");
+                var virt = node.GetAttribute("virt");
 
                 List<Parameter> parameters = null;
                 if (kind == "function")
@@ -98,6 +109,16 @@ namespace generatebinding.Parser
                         parameters.Add(LoadParameter(param));
                     }
                 }
+
+                type.Members.Add(new Member()
+                {
+                    ID = id,
+                    Kind = kind,
+                    Name = name,
+                    RawArgs = rawargs,
+                    Parameters = parameters,
+                    Virtual = virt
+                });
             }
         }
 
@@ -106,9 +127,24 @@ namespace generatebinding.Parser
             var type = xmlNode.SelectSingleNode("type");
             var name = xmlNode.GetChildText("declname");
 
+            List<object> segments = new List<object>();
+
+            foreach (XmlNode sub in type.ChildNodes)
+            {
+                if (sub is XmlText text)
+                {
+                    segments.Add(text.Value);
+                }
+                else
+                {
+                    segments.Add(new Reference(sub.GetAttribute("refid"), sub.GetAttribute("kindref"), sub.InnerText));
+                }
+            }
+
             return new Parameter()
             {
-                Name = name
+                Name = name,
+                Type = segments
             };
         }
     }

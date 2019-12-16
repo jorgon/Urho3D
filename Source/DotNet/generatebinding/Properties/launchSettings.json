@@ -2,7 +2,7 @@
   "profiles": {
     "generatebinding": {
       "commandName": "Project",
-      "commandLineArgs": "C:/Personal/Urho3D/build/Docs/xml C:/Personal/Urho3D/Source/DotNet"
+      "commandLineArgs": "C:\\Users\\jorgon\\source\\Urho3D\\build\\Docs\\xml C:\\Users\\jorgon\\source/Urho3D/Source/DotNet"
     }
   }
 }
